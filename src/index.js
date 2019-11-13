@@ -8,5 +8,5 @@ const handler = new MessageHandler();
 // Register event handlers
 client.on("message", handler.messageHandler);
 
-// // Connect to Twitch
+// Connect to Twitch
 client.connect();
