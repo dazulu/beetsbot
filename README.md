@@ -1,6 +1,6 @@
 # BeetsBot
 
-> Twitch bot for IrishBeets
+> A Twitch chat bot
 
 ## Setup
 
@@ -24,15 +24,27 @@ $ npm run start
 
 ## Battle Royale
 
-Typing `!br` in chat will start a Battle Royale game if there are 2 or more players and a Battle Royale game is not already in progress. This command is streamer-only.
+An automated take on the popular Battle Royale genre. For a round, current members of chat are the active players. Players will randomly win 1v1 battles against other random players. There is a small chance a player can eliminate themselves. The last player alive is declared the winner.
+
+![Battle Royale example](screenshots/battle-royale.jpg "Battle Royale example")
+
+```bash
+# To start Battle Royale from Stream chat
+!br
+```
+
+- There must be 2 or more players and a game not already in progress.
+- The command is **streamer-only**.
 
 ### Configuration
 
 Battle Royale can be configured in `src/config.json`
 
-```json
-prefix: "<BR>" // chat prefix for the bot messages in chat
-selfEliminationChance: 8 // percentage chance of a self-elimination
-minMessageWait: 10000 // min time between actions in milliseconds
-maxMessageWait: 30000 // max time between actions in milliseconds
-```
+| Setting                 | Type     | Description                               |
+| ----------------------- | -------- | ----------------------------------------- |
+| `prefix`                | `string` | Chat prefix for the bot messages in chat. |
+| `selfEliminationChance` | `number` | Percentage chance of a self-elimination.  |
+| `minMessageWait`        | `number` | Min time between actions in _ms_.\*       |
+| `maxMessageWait`        | `number` | Max time between actions in _ms_.         |
+
+_\*Keep `minMessageWait` upwards of 1000 or the bots messages will get throttled_
