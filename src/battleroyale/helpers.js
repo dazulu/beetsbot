@@ -33,10 +33,6 @@ export function getBattleMessage(winner, loser) {
 
 // Returns the constructed self elimination  message
 export function getSelfEliminationMessage(player) {
-  const messageTemplate =
-    selfEliminationTemplates[
-      (Math.floor(Math.random() * selfEliminationTemplates.length), 1)
-    ];
-
+  const messageTemplate = selfEliminationTemplates[getRandomNumber(2, 0)];
   return messageTemplate.replace("%a", `@${player}`);
 }

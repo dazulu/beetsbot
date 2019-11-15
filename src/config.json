@@ -1,7 +1,7 @@
 {
   "battleroyale": {
     "prefix": "<BR>",
-    "selfEliminationChance": 20,
+    "selfEliminationChance": 10,
     "minMessageWait": 5000,
     "maxMessageWait": 20000
   }
