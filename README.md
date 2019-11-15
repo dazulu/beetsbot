@@ -30,9 +30,9 @@ Typing `!br` in chat will start a Battle Royale game if there are 2 or more play
 
 Battle Royale can be configured in `src/config.json`
 
-```js
-prefix: "<BR>"; // chat prefix for the bot messages in chat
-selfEliminationChance: 8; // percentage chance of a self-elimination
-minMessageWait: 10000; // min time between actions in milliseconds
-maxMessageWait: 30000; // max time between actions in milliseconds
+```json
+prefix: "<BR>" // chat prefix for the bot messages in chat
+selfEliminationChance: 8 // percentage chance of a self-elimination
+minMessageWait: 10000 // min time between actions in milliseconds
+maxMessageWait: 30000 // max time between actions in milliseconds
 ```
