@@ -1,16 +1,30 @@
+import initBattleRoyale from "./battleroyale";
+
 export default client =>
   class MessageHandlerClass {
     constructor() {
-      this.messageHandler = (channel, tags, message, self) => {
-        // We don't want to act on our own messages
-        if (self) return;
+      this.messageHandler = async (channel, tags, message, self) => {
+        // We don't want to process our own messages
+        // or messages not beginning with '!'
+        if (self || message[0] !== "!") return false;
 
-        // Remove white space from user's message
-        const msg = message.trim();
+        const channelName = channel.split("#")[1];
+        const isBroadcaster =
+          tags.username === process.env.CHANNEL_NAME.toLowerCase();
+
+        // Basic sanitation on message
+        message = message.trim().toLowerCase();
 
         // Respond to a command
-        if (msg.toLowerCase() === "!beets") {
-          client.say(channel, `@${tags.username}! Non-stop beets!`);
+        if (message === "!hi") {
+          client.say(channel, `@${tags.username}, feel the beet!`);
+        }
+
+        // Broadcaster only commands
+        if (isBroadcaster) {
+          if (message === "!br") {
+            initBattleRoyale(client, channelName);
+          }
         }
       };
     }
