@@ -2,6 +2,10 @@
 
 > A Twitch chat bot
 
+## Features
+
+- Battle Royale
+
 ## Setup
 
 We need to set a few environment variables for the bot to be able to auth and connect to a Twitch channel. These can be included in a _.env_ file, which will be imported.
