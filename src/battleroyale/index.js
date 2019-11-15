@@ -40,7 +40,7 @@ export default async function(client, channelName) {
   }
 
   consola.info(`${prefix} Starting Battle Royale with ${players.join(", ")}`);
-  client.say(channelName, `${prefix} Where we droppin?`);
+  client.say(channelName, `${prefix} Players are droppin' in...`);
 
   setTimeout(() => {
     let timeout;
