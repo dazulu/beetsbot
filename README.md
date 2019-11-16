@@ -15,7 +15,7 @@ We need to set a few environment variables for the bot to be able to auth and co
 
 `OAUTH_TOKEN`: OAuth token for authentication
 
-`CHANNEL_NAME`: Name of the channel to connect to
+`CHANNEL_NAMES`: String delimited list of Twitch Channels to join
 
 ```bash
 # Install dependencies

@@ -1,4 +1,7 @@
+import "dotenv/config";
 import tmi from "tmi.js";
+
+const channels = process.env.CHANNEL_NAMES.replace(" ", "").split(",");
 
 export default new tmi.Client({
   options: { debug: true },
@@ -8,7 +11,7 @@ export default new tmi.Client({
   },
   identity: {
     username: process.env.BOT_USERNAME,
-    password: process.env.OAUTH_TOKEN
+    password: process.env.TWITCH_OAUTH_TOKEN
   },
-  channels: [process.env.CHANNEL_NAME]
+  channels: channels
 });
