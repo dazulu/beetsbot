@@ -25,11 +25,24 @@ export default class ThrowCatch {
   // Catches the item, if there was a previous throw
   catch(channelName, player) {
     if (this.tosser) {
-      client.say(
-        channelName,
-        `${player} caught ${this.item} thrown by ${this.tosser}`
-      );
-      this.tosser = "";
+      if (this.tosser === player) {
+        // items are defined with their indefinite articles and possessive pronouns
+        // we are removing them here due to different sentence structure
+        client.say(
+          channelName,
+          `${player} caught their own ${this.item
+            .split(" ")
+            .slice(1)
+            .join(" ")}`
+        );
+      } else {
+        client.say(
+          channelName,
+          `${player} caught ${this.item} thrown by ${this.tosser}`
+        );
+      }
     }
+
+    this.tosser = "";
   }
 }
