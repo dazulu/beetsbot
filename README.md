@@ -17,15 +17,21 @@ We need to set a few environment variables for the bot to be able to auth and co
 
 `CHANNEL_NAME`: Name of the channel to connect to
 
-## Build
-
 ```bash
-# install dependencies
+# Install dependencies
 $ npm install
 
-# serve with nodemon and babel compilation
+# Serve with nodemon and babel-node for local development
+$ npm run dev
+
+# Run webpack build for production
+$ npm run build
+
+# Run production app
 $ npm run start
 ```
+
+---
 
 ## Throw/Catch
 

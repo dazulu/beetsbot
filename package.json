@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "Twitch Chat Bot",
   "main": "src/index.js",
+  "private": true,
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "build": "npx webpack",
+    "prebuild": "rimraf dist",
+    "start": "node dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "IrishBeets",
@@ -12,11 +16,13 @@
     "@babel/core": "^7.7.2",
     "@babel/node": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "rimraf": "^3.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "consola": "^2.11.0",
     "dotenv": "^8.2.0",
     "tmi.js": "^1.5.0"
   }
