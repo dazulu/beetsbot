@@ -61,27 +61,27 @@ export default class BattleRoyale {
   }
 
   gameLogic() {
-    let message;
-
-    const chanceOfBattle = randNum(100);
-
     // 1v1 battle or chance of self elimination
-    if (chanceOfBattle > chanceOfSelfElimination) {
+    if (randNum(100) > 8) {
       // Randomly extract winner and loser of a 1v1 battle
       const winner = this.players.splice(randNum(this.players.length), 1);
       const loser = this.players.splice(randNum(this.players.length), 1);
 
-      // Put the winner back into the pool of living players
+      // put the winner back into the pool of living players
       this.players.push(winner);
 
-      message = getBattleMessage(winner, loser);
+      client.say(
+        this.channelName,
+        `${prefix} ${getBattleMessage(winner, loser)}`
+      );
     } else {
       // Self-elimination
       const player = this.players.splice(randNum(this.players.length), 1);
-      message = getSelfEliminationMessage(player);
+      client.say(
+        this.channelName,
+        `${prefix} ${getSelfEliminationMessage(player)}`
+      );
     }
-
-    client.say(this.channelName, `${prefix} ${message}`);
 
     // If there is only 1 player left, they are the winner
     // else go back into the game loop

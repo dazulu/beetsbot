@@ -1,9 +1,8 @@
 {
   "battleroyale": {
     "prefix": "<BR>",
-    "chanceOfSelfElimination": 10,
-    "minMessageWait": 3000,
-    "maxMessageWait": 10000
+    "minMessageWait": 5000,
+    "maxMessageWait": 15000
   },
   "throwcatch": {
     "item": "a beet"
