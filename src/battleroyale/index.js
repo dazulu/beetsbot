@@ -1,6 +1,7 @@
+import client from "../client";
 import getChatMembers from "../getChatMembers";
 import config from "../config.json";
-import { getRandomNumber } from "../utilities.js";
+import { randNum } from "../utilities.js";
 import {
   getWinMessage,
   getBattleMessage,
@@ -9,80 +10,92 @@ import {
 
 const {
   prefix,
-  selfEliminationChance,
+  chanceOfSelfElimination,
   minMessageWait,
   maxMessageWait
 } = config.battleroyale;
 
-let isGameInProgress = false;
-
-export default async function(client, channelName) {
-  if (isGameInProgress) {
-    console.log(`${prefix} Already in progress!`);
-    client.say(channelName, `${prefix} Already in progress!`);
-    return;
+export default class BattleRoyale {
+  constructor() {
+    this.gameInProgress = false;
+    this.channelName = "";
+    this.players = [];
   }
 
-  isGameInProgress = true;
+  async init(channelName) {
+    this.channelName = channelName;
 
-  const chatMembers = await getChatMembers(channelName);
-  const players = chatMembers.reduce((array, item) => {
-    array.push(item.name);
-    return array;
-  }, []);
+    if (this.gameInProgress) {
+      client.say(this.channelName, `${prefix} Already in progress!`);
+    } else {
+      const players = await this.getPlayers();
 
-  if (players.length <= 1) {
-    console.log(`${prefix} Not enough players to start`);
-    client.say(channelName, `${prefix} Not enough players to start`);
-    return;
+      if (players.length <= 1) {
+        client.say(this.channelName, `${prefix} Not enough players to start`);
+      } else {
+        this.players = players;
+        client.say(this.channelName, `${prefix} Players droppin' in...`);
+        this.startRound();
+      }
+    }
   }
 
-  console.log(`${prefix} Starting Battle Royale with ${players.join(", ")}`);
-  client.say(channelName, `${prefix} Players are droppin' in...`);
+  async getPlayers() {
+    const chatMembers = await getChatMembers(this.channelName);
+    return chatMembers.reduce((array, item) => {
+      array.push(item.name);
+      return array;
+    }, []);
+  }
 
-  setTimeout(() => {
-    let timeout;
-    (function ontimeout() {
-      let message;
+  startRound() {
+    setTimeout(() => {
+      this.gameLogic();
+    }, randNum(minMessageWait, maxMessageWait));
+  }
 
-      const percentage = getRandomNumber(100);
+  endRound() {
+    setTimeout(() => {
+      const winMessage = getWinMessage(this.players[0]);
+      client.say(this.channelName, `${prefix} ${winMessage}`);
+      this.gameInProgress = false;
+    }, 2000);
+  }
 
-      // 1v1 battle else self elimination
-      if (percentage > selfEliminationChance) {
-        // Randomly extract winner and loser of a 1v1 battle
-        const winner = players.splice(getRandomNumber(players.length), 1);
-        const loser = players.splice(getRandomNumber(players.length), 1);
+  gameLogic() {
+    let message;
 
-        // Put the winner back into the pool of living players
-        players.push(winner);
+    const chanceOfBattle = randNum(100);
 
-        message = getBattleMessage(winner, loser);
-      } else {
-        const player = players.splice(getRandomNumber(players.length), 1);
-        message = getSelfEliminationMessage(player);
-      }
+    console.log(this.players);
 
-      console.log(`${prefix} ${message}`);
-      console.log(`${prefix} Remaining:", ${players.join(", ")}`);
+    // 1v1 battle or chance of self elimination
+    if (chanceOfBattle > chanceOfSelfElimination) {
+      // Randomly extract winner and loser of a 1v1 battle
+      const winner = this.players.splice(randNum(this.players.length), 1);
+      const loser = this.players.splice(randNum(this.players.length), 1);
 
-      client.say(channelName, `${prefix} ${message}`);
+      // Put the winner back into the pool of living players
+      this.players.push(winner);
 
-      // If there is only 1 player left, they are the winner
-      // else set another timeout
-      if (players.length === 1) {
-        setTimeout(() => {
-          const winMessage = getWinMessage(players[0]);
-          console.log(`${prefix} ${winMessage}`);
-          client.say(channelName, `${prefix} ${winMessage}`);
-          isGameInProgress = false;
-        }, 2000);
-        clearTimeout(timeout);
-      } else {
-        timeout = setTimeout(
-          ontimeout,
-          getRandomNumber(minMessageWait, maxMessageWait)
-        );
-      }
-    })();
-  }, getRandomNumber(minMessageWait, maxMessageWait));
+      message = getBattleMessage(winner, loser);
+    } else {
+      // Self-elimination
+      const player = this.players.splice(randNum(this.players.length), 1);
+      message = getSelfEliminationMessage(player);
+    }
+
+    client.say(this.channelName, `${prefix} ${message}`);
+
+    // If there is only 1 player left, they are the winner
+    // else go back into the game loop
+    if (this.players.length === 1) {
+      this.endRound();
+    } else {
+      setTimeout(
+        this.gameLogic.bind(this),
+        randNum(minMessageWait, maxMessageWait)
+      );
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import client from "../client";
 import config from "../config.json";
 
-export default class ThrowCatchHandler {
+export default class ThrowCatch {
   constructor() {
     // The person who last threw the item
     this.tosser = "";

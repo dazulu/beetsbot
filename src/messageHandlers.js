@@ -1,9 +1,9 @@
 import client from "./client";
-import initBattleRoyale from "./battleroyale";
-import ThrowCatchHandler from "./throwcatch";
+import BattleRoyale from "./battleroyale";
+import ThrowCatch from "./throwcatch";
 import { stripHash } from "./utilities.js";
 
-const throwCatch = new ThrowCatchHandler();
+const throwCatch = new ThrowCatch();
 
 export default function messageHandler(channel, tags, message, self) {
   // Remove hash from channel name
@@ -36,7 +36,7 @@ export default function messageHandler(channel, tags, message, self) {
   if (isBroadcaster) {
     // Initiate Battle Royale
     if (message === "!br") {
-      initBattleRoyale(client, channelName);
+      new BattleRoyale().init(channelName);
     }
   }
 }
