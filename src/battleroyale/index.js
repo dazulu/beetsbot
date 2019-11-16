@@ -8,12 +8,7 @@ import {
   getSelfEliminationMessage
 } from "./helpers";
 
-const {
-  prefix,
-  chanceOfSelfElimination,
-  minMessageWait,
-  maxMessageWait
-} = config.battleroyale;
+const { prefix, minMessageWait, maxMessageWait } = config.battleroyale;
 
 export default class BattleRoyale {
   constructor() {
