@@ -1,12 +1,9 @@
 import "dotenv/config";
 import client from "./client";
-import MessageHandlerClass from "./messageHandlers";
-
-const MessageHandler = MessageHandlerClass(client);
-const handler = new MessageHandler();
+import messageHandler from "./messageHandlers";
 
 // Register event handlers
-client.on("message", handler.messageHandler);
+client.on("message", messageHandler);
 
 // Connect to Twitch
 client.connect();

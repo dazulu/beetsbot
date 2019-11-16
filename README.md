@@ -5,6 +5,7 @@
 ## Features
 
 - Battle Royale
+- Throw/Catch
 
 ## Setup
 
@@ -25,6 +26,31 @@ $ npm install
 # serve with nodemon and babel compilation
 $ npm run start
 ```
+
+## Throw/Catch
+
+A set of commands to enable throwing and catching of a pre-defined item between chat members. There's no hidden depth here. It's just for fun.
+
+![Throw/Catch example](screenshots/throw-catch.jpg "Throw/Catch example")
+
+```bash
+# To throw an item to be caught
+!throw
+
+# To catch the last item that was thrown
+!catch
+
+# To throw an item at a chat member
+!throw @username
+```
+
+### Configuration
+
+Throw/Catch can be configured in `src/config.json`
+
+| Setting | Type     | Description                  |
+| ------- | -------- | ---------------------------- |
+| `item`  | `string` | Name of the item to be used. |
 
 ## Battle Royale
 

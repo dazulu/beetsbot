@@ -1,31 +1,40 @@
+import client from "./client";
 import initBattleRoyale from "./battleroyale";
+import ThrowCatchHandler from "./throwcatch";
 
-export default client =>
-  class MessageHandlerClass {
-    constructor() {
-      this.messageHandler = async (channel, tags, message, self) => {
-        // We don't want to process our own messages
-        // or messages not beginning with '!'
-        if (self || message[0] !== "!") return false;
+const throwCatch = new ThrowCatchHandler();
 
-        const channelName = channel.split("#")[1];
-        const isBroadcaster =
-          tags.username === process.env.CHANNEL_NAME.toLowerCase();
+const channelName = process.env.CHANNEL_NAME;
 
-        // Basic sanitation on message
-        message = message.trim().toLowerCase();
+export default function messageHandler(channel, tags, message, self) {
+  // We don't want to process our own messages
+  // or messages not beginning with '!'
+  if (self || message[0] !== "!") return false;
 
-        // Respond to a command
-        if (message === "!hi") {
-          client.say(channel, `@${tags.username}, feel the beet!`);
-        }
+  const isBroadcaster = tags.username === channelName.toLowerCase();
 
-        // Broadcaster only commands
-        if (isBroadcaster) {
-          if (message === "!br") {
-            initBattleRoyale(client, channelName);
-          }
-        }
-      };
+  // Basic sanitation on message
+  message = message.trim().toLowerCase();
+
+  // Say hello
+  if (message === "!hi" || message === "!hey" || message === "!hello") {
+    client.say(channel, `Hi, @${tags.username} :)`);
+  }
+
+  // Throwing and Catching
+  if (message === "!throw") {
+    throwCatch.throw(tags.username);
+  } else if (/^!throw\s@[a-zA-Z]+$/.test(message)) {
+    throwCatch.throwAtTarget(tags.username, message);
+  } else if (message === "!catch") {
+    throwCatch.catch(tags.username);
+  }
+
+  // Broadcaster only commands
+  if (isBroadcaster) {
+    // Initiate Battle Royale
+    if (message === "!br") {
+      initBattleRoyale(client, channelName);
     }
-  };
+  }
+}

@@ -4,5 +4,8 @@
     "selfEliminationChance": 10,
     "minMessageWait": 5000,
     "maxMessageWait": 20000
+  },
+  "throwcatch": {
+    "item": "an apple"
   }
 }
