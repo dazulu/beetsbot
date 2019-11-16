@@ -1,5 +1,4 @@
 import axios from "axios";
-const consola = require("consola");
 
 export default function getChatters(channelName, _attemptCount = 0) {
   return axios
@@ -20,7 +19,7 @@ export default function getChatters(channelName, _attemptCount = 0) {
       if (_attemptCount < 3) {
         return getChatters(channelName, _attemptCount + 1);
       }
-      consola.error(err);
+      console.log(err);
       throw err;
     });
 }

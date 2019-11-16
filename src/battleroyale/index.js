@@ -7,8 +7,6 @@ import {
   getSelfEliminationMessage
 } from "./helpers";
 
-const consola = require("consola");
-
 const {
   prefix,
   selfEliminationChance,
@@ -20,7 +18,7 @@ let isGameInProgress = false;
 
 export default async function(client, channelName) {
   if (isGameInProgress) {
-    consola.info(`${prefix} Already in progress!`);
+    console.log(`${prefix} Already in progress!`);
     client.say(channelName, `${prefix} Already in progress!`);
     return;
   }
@@ -34,12 +32,12 @@ export default async function(client, channelName) {
   }, []);
 
   if (players.length <= 1) {
-    consola.info(`${prefix} Not enough players to start`);
+    console.log(`${prefix} Not enough players to start`);
     client.say(channelName, `${prefix} Not enough players to start`);
     return;
   }
 
-  consola.info(`${prefix} Starting Battle Royale with ${players.join(", ")}`);
+  console.log(`${prefix} Starting Battle Royale with ${players.join(", ")}`);
   client.say(channelName, `${prefix} Players are droppin' in...`);
 
   setTimeout(() => {
@@ -64,8 +62,8 @@ export default async function(client, channelName) {
         message = getSelfEliminationMessage(player);
       }
 
-      consola.info(`${prefix} ${message}`);
-      consola.info(`${prefix} Remaining:", ${players.join(", ")}`);
+      console.log(`${prefix} ${message}`);
+      console.log(`${prefix} Remaining:", ${players.join(", ")}`);
 
       client.say(channelName, `${prefix} ${message}`);
 
@@ -74,7 +72,7 @@ export default async function(client, channelName) {
       if (players.length === 1) {
         setTimeout(() => {
           const winMessage = getWinMessage(players[0]);
-          consola.success(`${prefix} ${winMessage}`);
+          console.log(`${prefix} ${winMessage}`);
           client.say(channelName, `${prefix} ${winMessage}`);
           isGameInProgress = false;
         }, 2000);
