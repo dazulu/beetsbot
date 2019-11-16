@@ -25,11 +25,11 @@ export default function messageHandler(channel, tags, message, self) {
 
   // Throwing and Catching
   if (message === "!throw") {
-    throwCatch.throw(tags.username);
+    throwCatch.throw(channelName, tags.username);
   } else if (/^!throw\s@[a-zA-Z]+$/.test(message)) {
-    throwCatch.throwAtTarget(tags.username, message);
+    throwCatch.throwAtTarget(channelName, tags.username, message);
   } else if (message === "!catch") {
-    throwCatch.catch(tags.username);
+    throwCatch.catch(channelName, tags.username);
   }
 
   // Broadcaster only commands
