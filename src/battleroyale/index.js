@@ -49,9 +49,7 @@ export default class BattleRoyale {
   }
 
   startRound() {
-    setTimeout(() => {
-      this.gameLogic();
-    }, randNum(minMessageWait, maxMessageWait));
+    setTimeout(this.gameLogic.bind(this), 2000);
   }
 
   endRound() {
@@ -66,8 +64,6 @@ export default class BattleRoyale {
     let message;
 
     const chanceOfBattle = randNum(100);
-
-    console.log(this.players);
 
     // 1v1 battle or chance of self elimination
     if (chanceOfBattle > chanceOfSelfElimination) {
