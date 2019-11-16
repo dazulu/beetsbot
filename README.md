@@ -4,8 +4,8 @@
 
 ## Features
 
-- Battle Royale
-- Throw/Catch
+- [Battle Royale](#battle-royale)
+- [Throw/Catch](#throwcatch)
 
 ## Setup
 
