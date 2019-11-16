@@ -7,3 +7,7 @@ client.on("message", messageHandler);
 
 // Connect to Twitch
 client.connect();
+
+client.on("connected", function(address, port) {
+  console.log(`Connected channels: ${client.getOptions().channels.length}`);
+});
