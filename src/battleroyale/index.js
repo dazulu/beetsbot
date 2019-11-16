@@ -1,7 +1,7 @@
 import getChatMembers from "../getChatMembers";
 import config from "../config.json";
+import { getRandomNumber } from "../utilities.js";
 import {
-  getRandomNumber,
   getWinMessage,
   getBattleMessage,
   getSelfEliminationMessage

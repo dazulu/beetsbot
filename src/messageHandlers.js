@@ -1,12 +1,14 @@
 import client from "./client";
 import initBattleRoyale from "./battleroyale";
 import ThrowCatchHandler from "./throwcatch";
+import { stripHash } from "./utilities.js";
 
 const throwCatch = new ThrowCatchHandler();
 
-const channelName = process.env.CHANNEL_NAME;
-
 export default function messageHandler(channel, tags, message, self) {
+  // Remove hash from channel name
+  const channelName = stripHash(channel);
+
   // We don't want to process our own messages
   // or messages not beginning with '!'
   if (self || message[0] !== "!") return false;
