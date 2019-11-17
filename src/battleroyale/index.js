@@ -1,7 +1,7 @@
 import client from '../client';
 import getChatMembers from '../getChatMembers';
 import config from '../config.json';
-import { randNum } from '../utilities.js';
+import { randNum } from '../utilities';
 import { getWinMessage, getBattleMessage, getSelfEliminationMessage } from './helpers';
 
 const { prefix, minMessageWait, maxMessageWait } = config.battleroyale;
