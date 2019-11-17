@@ -1,4 +1,7 @@
 {
+  "general": {
+    "commandPrefix": "!"
+  },
   "battleroyale": {
     "messagePrefix": "<BR>",
     "minMessageWait": 5000,
