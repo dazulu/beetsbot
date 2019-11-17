@@ -6,6 +6,7 @@
 
 - [Battle Royale](#battle-royale)
 - [Throw/Catch](#throwcatch)
+- [Random Number](#random-number)
 
 ## Setup
 
@@ -37,7 +38,7 @@ $ npm run start
 
 A set of commands to enable throwing and catching of a pre-defined item between chat members. There's no hidden depth here. It's just for fun.
 
-![Throw/Catch example](screenshots/throw-catch.jpg "Throw/Catch example")
+![Throw/Catch example](screenshots/throw-catch.jpg 'Throw/Catch example')
 
 ```bash
 # To throw an item to be caught
@@ -58,11 +59,13 @@ Throw/Catch can be configured in `src/config.json`
 | ------- | -------- | ---------------------------- |
 | `item`  | `string` | Name of the item to be used. |
 
+---
+
 ## Battle Royale
 
 An automated take on the popular Battle Royale genre. For a round, current members of chat are the active players. Players will randomly win 1v1 battles against other random players. There is a small chance a player can eliminate themselves. The last player alive is declared the winner.
 
-![Battle Royale example](screenshots/battle-royale.jpg "Battle Royale example")
+![Battle Royale example](screenshots/battle-royale.jpg 'Battle Royale example')
 
 ```bash
 # To start Battle Royale from Stream chat
@@ -84,3 +87,19 @@ Battle Royale can be configured in `src/config.json`
 | `maxMessageWait`        | `number` | Max time between actions in _ms_.         |
 
 _\*Keep `minMessageWait` upwards of 1000 or the bots messages will get throttled_
+
+---
+
+## Random Number
+
+This feature asks the bot to pick a random number. By default it rolls between 1 and 100. If you include a number in the command, it will use that number as the max e.g. `!roll 500`.
+
+![random roll example](screenshots/roll.jpg 'random roll example')
+
+```bash
+# To roll between 1 and 100
+!roll
+
+# To roll between 1 and x e.g. !roll 500
+!roll <positive number>
+```
