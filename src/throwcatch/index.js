@@ -1,10 +1,10 @@
-import client from "../client";
-import config from "../config.json";
+import client from '../client';
+import config from '../config.json';
 
 export default class ThrowCatch {
   constructor() {
     // The person who last threw the item
-    this.tosser = "";
+    this.tosser = '';
 
     // The item that will be thrown/caught
     this.item = config.throwcatch.item;
@@ -18,7 +18,7 @@ export default class ThrowCatch {
 
   // Throw the item at a specific target
   throwAtTarget(channelName, player, message) {
-    const target = message.split("@")[1];
+    const target = message.split('@')[1];
     client.say(channelName, `${player} threw ${this.item} @${target}`);
   }
 
@@ -31,18 +31,15 @@ export default class ThrowCatch {
         client.say(
           channelName,
           `${player} caught their own ${this.item
-            .split(" ")
+            .split(' ')
             .slice(1)
-            .join(" ")}`
+            .join(' ')}`
         );
       } else {
-        client.say(
-          channelName,
-          `${player} caught ${this.item} thrown by ${this.tosser}`
-        );
+        client.say(channelName, `${player} caught ${this.item} thrown by ${this.tosser}`);
       }
     }
 
-    this.tosser = "";
+    this.tosser = '';
   }
 }

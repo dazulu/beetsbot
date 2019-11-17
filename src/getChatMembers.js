@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default function getChatters(channelName, _attemptCount = 0) {
   return axios
@@ -8,8 +8,9 @@ export default function getChatters(channelName, _attemptCount = 0) {
         (p, [type, list]) =>
           p.concat(
             list.map(name => {
-              if (name === channelName) type = "broadcaster";
-              return { name, type };
+              let chatterType = type;
+              if (name === channelName) chatterType = 'broadcaster';
+              return { name, chatterType };
             })
           ),
         []

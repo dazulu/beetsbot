@@ -1,5 +1,5 @@
 // Strip hash e.g. '#channel' -> 'channel'
-export const stripHash = channel => channel.replace("#", "");
+export const stripHash = channel => channel.replace('#', '');
 
 // Random number generator
 export function randNum(max, min = false) {
