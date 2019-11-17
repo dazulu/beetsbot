@@ -1,19 +1,15 @@
-import client from "../client";
-import getChatMembers from "../getChatMembers";
-import config from "../config.json";
-import { randNum } from "../utilities.js";
-import {
-  getWinMessage,
-  getBattleMessage,
-  getSelfEliminationMessage
-} from "./helpers";
+import client from '../client';
+import getChatMembers from '../getChatMembers';
+import config from '../config.json';
+import { randNum } from '../utilities.js';
+import { getWinMessage, getBattleMessage, getSelfEliminationMessage } from './helpers';
 
 const { prefix, minMessageWait, maxMessageWait } = config.battleroyale;
 
 export default class BattleRoyale {
   constructor() {
     this.gameInProgress = false;
-    this.channelName = "";
+    this.channelName = '';
     this.players = [];
   }
 
@@ -59,23 +55,17 @@ export default class BattleRoyale {
     // 1v1 battle or chance of self elimination
     if (randNum(100) > 8) {
       // Randomly extract winner and loser of a 1v1 battle
-      const winner = this.players.splice(randNum(this.players.length), 1);
-      const loser = this.players.splice(randNum(this.players.length), 1);
+      const winner = this.players.splice(randNum(this.players.length - 1, 0), 1);
+      const loser = this.players.splice(randNum(this.players.length - 1, 0), 1);
 
       // put the winner back into the pool of living players
       this.players.push(winner);
 
-      client.say(
-        this.channelName,
-        `${prefix} ${getBattleMessage(winner, loser)}`
-      );
+      client.say(this.channelName, `${prefix} ${getBattleMessage(winner, loser)}`);
     } else {
       // Self-elimination
-      const player = this.players.splice(randNum(this.players.length), 1);
-      client.say(
-        this.channelName,
-        `${prefix} ${getSelfEliminationMessage(player)}`
-      );
+      const player = this.players.splice(randNum(this.players.length - 1, 0), 1);
+      client.say(this.channelName, `${prefix} ${getSelfEliminationMessage(player)}`);
     }
 
     // If there is only 1 player left, they are the winner
@@ -83,10 +73,7 @@ export default class BattleRoyale {
     if (this.players.length === 1) {
       this.endRound();
     } else {
-      setTimeout(
-        this.gameLogic.bind(this),
-        randNum(minMessageWait, maxMessageWait)
-      );
+      setTimeout(this.gameLogic.bind(this), randNum(minMessageWait, maxMessageWait));
     }
   }
 }
