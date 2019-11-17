@@ -17,9 +17,14 @@ export default function messageHandler(channel, tags, message, self) {
   // Basic sanitation on message
   message = message.trim().toLowerCase();
 
-  // Random num between 1 and 100
+  // Random num between 1 and 100 else accept value for between 1 and x
   if (message === "!roll") {
     client.action(channel, `rolls ${randNum(100)}`);
+  } else if (/^!roll\s\d+$/.test(message)) {
+    const max = parseInt(message.split(" ")[1]);
+    if (max > 0) {
+      client.action(channel, `rolls ${randNum(max)}`);
+    }
   }
 
   // Say hello
