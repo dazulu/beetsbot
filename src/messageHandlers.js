@@ -1,22 +1,26 @@
 import client from "./client";
 import BattleRoyale from "./battleroyale";
 import ThrowCatch from "./throwcatch";
-import { stripHash } from "./utilities.js";
+import { stripHash, randNum } from "./utilities.js";
 
 const throwCatch = new ThrowCatch();
 
 export default function messageHandler(channel, tags, message, self) {
-  // Remove hash from channel name
-  const channelName = stripHash(channel);
-
   // We don't want to process our own messages
   // or messages not beginning with '!'
   if (self || message[0] !== "!") return false;
 
+  // Remove hash from channel name
+  const channelName = stripHash(channel);
   const isBroadcaster = tags.username === channelName.toLowerCase();
 
   // Basic sanitation on message
   message = message.trim().toLowerCase();
+
+  // Random num between 1 and 100
+  if (message === "!roll") {
+    client.action(channel, `rolls ${randNum(100)}`);
+  }
 
   // Say hello
   if (message === "!hi" || message === "!hey" || message === "!hello") {
