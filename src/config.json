@@ -1,6 +1,6 @@
 {
   "battleroyale": {
-    "prefix": "<BR>",
+    "messagePrefix": "<BR>",
     "minMessageWait": 5000,
     "maxMessageWait": 15000
   },

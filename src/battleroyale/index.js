@@ -4,7 +4,7 @@ import config from '../config.json';
 import { randNum } from '../utilities';
 import { getWinMessage, getBattleMessage, getSelfEliminationMessage } from './helpers';
 
-const { prefix, minMessageWait, maxMessageWait } = config.battleroyale;
+const { messagePrefix, minMessageWait, maxMessageWait } = config.battleroyale;
 
 export default class BattleRoyale {
   constructor() {
@@ -17,15 +17,15 @@ export default class BattleRoyale {
     this.channelName = channelName;
 
     if (this.gameInProgress) {
-      client.say(this.channelName, `${prefix} Already in progress!`);
+      client.say(this.channelName, `${messagePrefix} Already in progress!`);
     } else {
       const players = await this.getPlayers();
 
       if (players.length <= 1) {
-        client.say(this.channelName, `${prefix} Not enough players to start`);
+        client.say(this.channelName, `${messagePrefix} Not enough players to start`);
       } else {
         this.players = players;
-        client.say(this.channelName, `${prefix} Players droppin' in...`);
+        client.say(this.channelName, `${messagePrefix} Players droppin' in...`);
         this.startRound();
       }
     }
@@ -46,7 +46,7 @@ export default class BattleRoyale {
   endRound() {
     setTimeout(() => {
       const winMessage = getWinMessage(this.players[0]);
-      client.say(this.channelName, `${prefix} ${winMessage}`);
+      client.say(this.channelName, `${messagePrefix} ${winMessage}`);
       this.gameInProgress = false;
     }, 2000);
   }
@@ -61,11 +61,11 @@ export default class BattleRoyale {
       // put the winner back into the pool of living players
       this.players.push(winner);
 
-      client.say(this.channelName, `${prefix} ${getBattleMessage(winner, loser)}`);
+      client.say(this.channelName, `${messagePrefix} ${getBattleMessage(winner, loser)}`);
     } else {
       // Self-elimination
       const player = this.players.splice(randNum(this.players.length - 1, 0), 1);
-      client.say(this.channelName, `${prefix} ${getSelfEliminationMessage(player)}`);
+      client.say(this.channelName, `${messagePrefix} ${getSelfEliminationMessage(player)}`);
     }
 
     // If there is only 1 player left, they are the winner
