@@ -2,7 +2,7 @@ import client from './client';
 import config from './config.json';
 import BattleRoyale from './battleroyale';
 import ThrowCatch from './throwcatch';
-import getRandomNumber from './randomnumber';
+import handleRoll from './roll';
 import { stripHash } from './utilities';
 
 const prefix = config.general.commandPrefix;
@@ -25,16 +25,15 @@ export default function messageHandler(channel, tags, message, self) {
 
     // Random number handling
     if (msg.startsWith(`${prefix}roll`)) {
-      getRandomNumber(channelName, msg);
+      handleRoll(channelName, msg);
     }
 
     // Throwing and Catching
-    if (msg === `${prefix}throw`) {
-      throwCatch.throw(channelName, tags.username);
-    } else if (/^!throw\s@[a-zA-Z]+$/.test(msg)) {
-      throwCatch.throwAtTarget(channelName, tags.username, msg);
+
+    if (msg.startsWith(`${prefix}throw`)) {
+      throwCatch.handleThrow(channelName, tags.username, msg);
     } else if (msg === `${prefix}catch`) {
-      throwCatch.catch(channelName, tags.username);
+      throwCatch.handleCatch(channelName, tags.username);
     }
 
     // Broadcaster only commands

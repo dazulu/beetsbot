@@ -5,6 +5,7 @@ import { randNum } from '../utilities';
 const prefix = config.general.commandPrefix;
 
 export default function(channelName, msg) {
+  // pattern to test if a custom number was requested
   const regex = new RegExp(`^${prefix}roll\\s[\\d]+$`);
 
   if (msg === `${prefix}roll`) {

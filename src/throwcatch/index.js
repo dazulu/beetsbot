@@ -1,6 +1,8 @@
 import client from '../client';
 import config from '../config.json';
 
+const prefix = config.general.commandPrefix;
+
 export default class ThrowCatch {
   constructor() {
     // The person who last threw the item
@@ -8,6 +10,16 @@ export default class ThrowCatch {
 
     // The item that will be thrown/caught
     this.item = config.throwcatch.item;
+  }
+
+  handleThrow(channelName, username, msg) {
+    // pattern to test if throw is directed at somebody
+    const regex = new RegExp(`^${prefix}throw\\s@[a-zA-Z]+$`);
+    if (msg === `${prefix}throw`) {
+      this.throw(channelName, username);
+    } else if (regex.test(msg)) {
+      this.throwAtTarget(channelName, username, msg);
+    }
   }
 
   // Throw the item up for somebody to !catch
@@ -23,7 +35,7 @@ export default class ThrowCatch {
   }
 
   // Catches the item, if there was a previous throw
-  catch(channelName, player) {
+  handleCatch(channelName, player) {
     if (this.tosser) {
       if (this.tosser === player) {
         // items are defined with their indefinite articles and possessive pronouns
