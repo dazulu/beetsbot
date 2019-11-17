@@ -32,6 +32,14 @@ $ npm run build
 $ npm run start
 ```
 
+### Configuration
+
+Configured in `src/config.json`
+
+| Setting         | Type     | Description                                    |
+| --------------- | -------- | ---------------------------------------------- |
+| `commandPrefix` | `string` | The prefix for chat commands e.g. ! or @ or \$ |
+
 ---
 
 ## Throw/Catch
@@ -79,12 +87,11 @@ An automated take on the popular Battle Royale genre. For a round, current membe
 
 Battle Royale can be configured in `src/config.json`
 
-| Setting                 | Type     | Description                               |
-| ----------------------- | -------- | ----------------------------------------- |
-| `prefix`                | `string` | Chat prefix for the bot messages in chat. |
-| `selfEliminationChance` | `number` | Percentage chance of a self-elimination.  |
-| `minMessageWait`        | `number` | Min time between actions in _ms_.\*       |
-| `maxMessageWait`        | `number` | Max time between actions in _ms_.         |
+| Setting          | Type     | Description                               |
+| ---------------- | -------- | ----------------------------------------- |
+| `prefix`         | `string` | Chat prefix for the bot messages in chat. |
+| `minMessageWait` | `number` | Min time between actions in _ms_.\*       |
+| `maxMessageWait` | `number` | Max time between actions in _ms_.         |
 
 _\*Keep `minMessageWait` upwards of 1000 or the bots messages will get throttled_
 
