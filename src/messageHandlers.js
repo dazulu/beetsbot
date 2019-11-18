@@ -1,18 +1,17 @@
 import client from './client';
 import config from './config.json';
-import BattleRoyale from './battleroyale';
-import ThrowCatch from './throwcatch';
 import handleRoll from './roll';
-import { stripHash } from './utilities';
+import preloadFeatures from './helpers/preloadFeatures';
 
 const prefix = config.general.commandPrefix;
-const throwCatch = new ThrowCatch();
+
+const features = preloadFeatures();
 
 export default function messageHandler(channel, tags, message, self) {
   // We don't want to process our own messages or messages not beginning with '!'
   if (!self || message[0] === `${prefix}`) {
     // Remove hash from channel name
-    const channelName = stripHash(channel);
+    const channelName = channel.replace('#', '');
     const isBroadcaster = tags.username === channelName.toLowerCase();
 
     // Basic sanitation on message
@@ -29,18 +28,17 @@ export default function messageHandler(channel, tags, message, self) {
     }
 
     // Throwing and Catching
-
     if (msg.startsWith(`${prefix}throw`)) {
-      throwCatch.handleThrow(channelName, tags.username, msg);
+      features[channelName].throwcatch.handleThrow(channelName, tags.username, msg);
     } else if (msg === `${prefix}catch`) {
-      throwCatch.handleCatch(channelName, tags.username);
+      features[channelName].throwcatch.handleCatch(channelName, tags.username);
     }
 
     // Broadcaster only commands
     if (isBroadcaster) {
       // Initiate Battle Royale
       if (msg === `${prefix}br`) {
-        new BattleRoyale().init(channelName);
+        features[channelName].battleroyale.init(channelName);
       }
     }
   }

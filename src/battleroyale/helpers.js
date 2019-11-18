@@ -1,6 +1,6 @@
 import { battleTemplate, winTemplate, selfEliminationTemplates } from './actions';
 import items from './items';
-import { randNum } from '../utilities';
+import { randNum } from '../helpers/utilities';
 
 // Returns a random item name
 export function getItem() {

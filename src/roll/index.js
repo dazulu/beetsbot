@@ -1,6 +1,6 @@
 import client from '../client';
 import config from '../config.json';
-import { randNum } from '../utilities';
+import { randNum } from '../helpers/utilities';
 
 const prefix = config.general.commandPrefix;
 
