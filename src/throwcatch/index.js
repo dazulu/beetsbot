@@ -14,7 +14,7 @@ export default class ThrowCatch {
 
   handleThrow(channelName, username, msg) {
     // pattern to test if throw is directed at somebody
-    const regex = new RegExp(`^${prefix}throw\\s@[a-zA-Z]+$`);
+    const regex = new RegExp(`^\\${prefix}throw\\s@[a-zA-Z]+$`, 'i');
     if (msg === `${prefix}throw`) {
       this.throw(channelName, username);
     } else if (regex.test(msg)) {
