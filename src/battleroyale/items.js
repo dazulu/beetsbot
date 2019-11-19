@@ -21,6 +21,8 @@ export default [
   'a [Railgun]',
   'a [Super Sheep]',
   'a [Homing Missile]',
+  'a [Pokéball]',
+  'a [Gravity Gun]',
   'an [Assault Rifle]',
   'the [Corrupted Ashbringer]',
   'the [Warglaives of Azzinoth]',
