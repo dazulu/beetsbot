@@ -1,11 +1,12 @@
 import client from './client';
 import config from './config.json';
 import handleRoll from './roll';
-import preloadFeatures from './helpers/preloadFeatures';
+import preloadIsolatedFeatures from './helpers/preload';
 
 const prefix = config.general.commandPrefix;
 
-const features = preloadFeatures();
+// Features that are unique to each channel e.g. Battle Royale.
+const features = preloadIsolatedFeatures();
 
 export default function messageHandler(channel, tags, message, self) {
   // We don't want to process our own messages or messages not beginning with '!'

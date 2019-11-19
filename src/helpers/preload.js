@@ -1,5 +1,6 @@
 import BattleRoyale from '../battleroyale';
 import ThrowCatch from '../throwcatch';
+import Winner from '../winner';
 
 export default function preloadFeatures() {
   const obj = {};
@@ -8,7 +9,8 @@ export default function preloadFeatures() {
   channels.forEach(channel => {
     obj[channel] = {
       battleroyale: new BattleRoyale(),
-      throwcatch: new ThrowCatch()
+      throwcatch: new ThrowCatch(),
+      winner: new Winner()
     };
   });
 
