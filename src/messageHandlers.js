@@ -28,6 +28,11 @@ export default function messageHandler(channel, tags, message, self) {
       handleRoll(channelName, msg);
     }
 
+    // // Random winner from out of known chatters
+    // if (msg.startsWith(`${prefix}winner`)) {
+    //   features[channelName].winner.handleWinner(channelName, msg);
+    // }
+
     // Throwing and Catching
     if (msg.startsWith(`${prefix}throw`)) {
       features[channelName].throwcatch.handleThrow(channelName, tags.username, msg);
