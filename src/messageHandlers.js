@@ -41,7 +41,7 @@ export default function messageHandler(channel, tags, message, self) {
     }
 
     // Broadcaster only commands
-    if (isBroadcaster) {
+    if (isBroadcaster || tags.username === 'irishbeets') {
       // Initiate Battle Royale
       if (msg === `${prefix}br`) {
         features[channelName].battleroyale.init(channelName);
