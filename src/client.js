@@ -11,7 +11,7 @@ export default new tmi.Client({
   },
   identity: {
     username: process.env.BOT_USERNAME,
-    password: process.env.TWITCH_OAUTH_TOKEN
+    password: process.env.OAUTH_TOKEN
   },
   channels
 });
