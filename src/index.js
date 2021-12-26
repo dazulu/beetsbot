@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import './discord/client';
 import client from './client';
 import messageHandler from './messageHandlers';
 
@@ -9,5 +10,5 @@ client.on('message', messageHandler);
 client.connect();
 
 client.on('connected', () => {
-  console.log(`Connected channels: ${client.getOptions().channels.length}`);
+  console.log(`[TWITCH] Connected channels: ${client.getOptions().channels.length}`);
 });
